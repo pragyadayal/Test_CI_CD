@@ -17,4 +17,4 @@ jobs:
     - name: Compile the program
       run: make
     - name: Run the program
-      run: ./hello
+      run: ./main
