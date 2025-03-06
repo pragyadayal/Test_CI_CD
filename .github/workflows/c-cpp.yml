@@ -19,7 +19,7 @@ jobs:
     - name: Upload artifact to JFrog Artifactory
       run: |
           curl -u ${{ secrets.JFROG_USER }}:${{ secrets.JFROG_PASSWORD }} \
-            -T ./main "http://127.0.0.1:8082/artifactory/my-repo/" 
+            -T ./main "http://127.0.0.1:8082/ui/repos/tree/General/my-repo" 
 
     - name: Run the program
       run: ./main
