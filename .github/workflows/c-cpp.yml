@@ -16,11 +16,10 @@ jobs:
       uses: actions/checkout@v4
     - name: Compile the program
       run: make
-    - name: Upload the compiled binary
-      uses: actions/upload-artifact@v4
-      with:
-          name: hello-binary
-          path: ./main  
+    - name: Upload artifact to JFrog Artifactory
+        run: |
+          curl -u ${{ secrets.JFROG_USER }}:${{ secrets.JFROG_PASSWORD }} \
+            -T ./main "http://127.0.0.1:8082/artifactory/my-repo/" 
 
     - name: Run the program
       run: ./main
