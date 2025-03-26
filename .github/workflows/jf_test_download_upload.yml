@@ -45,6 +45,9 @@ jobs:
             --password="" \
             --interactive=false \
             --insecure-tls=true
+    - name: JF Debug
+      run: |
+         jf c show
 
     - name: Upload to JFrog Artifactory
       run: |
