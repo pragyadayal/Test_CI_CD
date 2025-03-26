@@ -20,3 +20,4 @@ jobs:
       run: |
           curl -u ${{ secrets.JFROG_USER }}:${{ secrets.JFROG_PASSWORD }} \
             -T ./main "https://192.168.27.95/artifactory/example-repo-local/" 
+            
