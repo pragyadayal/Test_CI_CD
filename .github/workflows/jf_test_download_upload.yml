@@ -36,22 +36,15 @@ jobs:
       run: |
         jf config remove artifactory-server --quiet || echo "No existing config to remove"
    
-    - name: Add Config
-      run: |
-           jf config remove artifactory-server || echo "No existing config to remove" \
-           jf config add artifactory-server \
-             --artifactory-url="${{ secrets.JFROG_URL }}" \
-             --user="${{ secrets.JFROG_USER }}" \
-             --password="" \
-             --interactive=false \
-             --insecure-tls=true
-
-    - name: Debug JFrog
-      run: |
-        jf c show
-        echo "${{ secrets.JFROG_URL }}"
-        echo "${{ secrets.JFROG_USER }}"
-        echo "${{ secrets.JFROG_PASSWORD }}"
+    #- name: Add Config
+    #  run: |
+    #       jf config remove artifactory-server || echo "No existing config to remove" \
+    #       jf config add artifactory-server \
+     #        --artifactory-url="${{ secrets.JFROG_URL }}" \
+      #       --user="${{ secrets.JFROG_USER }}" \
+       #      --password="" \
+       #      --interactive=false \
+        #     --insecure-tls=true
 
     - name: Upload to JFrog Artifactory
       run: |
