@@ -27,8 +27,8 @@ jobs:
     - name: Configure JFrog CLI
       run: |
         jf config remove artifactory-server || echo "No existing config to remove"
-        jfrog config add artifactory-server \
-          --url="${{ secrets.JFROG_URL }}" \
+        jf config add artifactory-server \
+          --url="https://artifactory.matrixcomsec.org/artifactory" \
           --user="admin" \
           --password="Admin@123" \
           --interactive=false --insecure-tls=true
