@@ -20,7 +20,7 @@ jobs:
     #  run: |
     #     curl -u ${{ secrets.JFROG_USER }}:${{ secrets.JFROG_PASSWORD }} \
     #        -T ./main "https://192.168.27.95/artifactory/example-repo-local/" 
-     - name: Set up JFrog CLI
+    - name: Set up JFrog CLI
       run: |
         curl -fL https://install-cli.jfrog.io | sh
         jfrog config add artifactory-server --url="https://192.168.27.95/artifactory" \
