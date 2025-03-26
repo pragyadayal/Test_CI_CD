@@ -28,4 +28,4 @@ jobs:
 
     - name: Upload to JFrog Artifactory
       run: |
-        jf rt upload "sample-file.zip" "from-github-actions/sample-file.zip" --server-id=artifactory-server --insecure-tls
+        jf rt upload "sample-file.zip" "example-repo-local/sample-file.zip" --server-id=artifactory-server --insecure-tls
