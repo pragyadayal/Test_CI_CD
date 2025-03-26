@@ -38,12 +38,13 @@ jobs:
    
     - name: Add Config
       run: |
-        jf config add artifactory-server \
-          --artifactory-url="${{ secrets.JFROG_URL }}" \
-          --user="${{ secrets.JFROG_USER }}" \
-          --password="${{ secrets.JFROG_PASSWORD }}" \
-          --interactive=false \
-          --insecure-tls=true
+           jf config remove artifactory-server || echo "No existing config to remove" \
+           jf config add artifactory-server \
+             --artifactory-url="${{ secrets.JFROG_URL }}" \
+             --user="${{ secrets.JFROG_USER }}" \
+             --password="${{ secrets.JFROG_PASSWORD }}" \
+             --interactive=false \
+             --insecure-tls=true
 
     - name: Debug JFrog
       run: |
