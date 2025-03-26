@@ -16,8 +16,18 @@ jobs:
       uses: actions/checkout@v4
     - name: Compile the program
       run: make
+    #- name: Upload artifact to JFrog Artifactory
+    #  run: |
+    #     curl -u ${{ secrets.JFROG_USER }}:${{ secrets.JFROG_PASSWORD }} \
+    #        -T ./main "https://192.168.27.95/artifactory/example-repo-local/" 
+     - name: Set up JFrog CLI
+      run: |
+        curl -fL https://install-cli.jfrog.io | sh
+        jfrog config add artifactory-server --url="https://192.168.27.95/artifactory" \
+          --user="${{ secrets.JFROG_USER }}" --password="${{ secrets.JFROG_PASSWORD }}" \
+          --interactive=false --insecure
+
     - name: Upload artifact to JFrog Artifactory
       run: |
-          curl -u ${{ secrets.JFROG_USER }}:${{ secrets.JFROG_PASSWORD }} \
-            -T ./main "https://192.168.27.95/artifactory/example-repo-local/" 
+        jfrog rt u "./main" "example-repo-local/"
             
