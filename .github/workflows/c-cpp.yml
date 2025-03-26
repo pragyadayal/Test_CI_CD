@@ -26,12 +26,12 @@ jobs:
           version: latest
     - name: Configure JFrog CLI
       run: |
+        jf config remove artifactory-server || echo "No existing config to remove"
         jfrog config add artifactory-server \
           --url="${{ secrets.JFROG_URL }}" \
           --user="admin" \
           --password="Admin@123" \
-          --interactive=false
-          jfrog config edit artifactory-server --insecure-tls=true
+          --interactive=false --insecure-tls=true
           
     - name: Upload artifact to JFrog Artifactory
       run: |
