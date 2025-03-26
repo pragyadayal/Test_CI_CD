@@ -1,0 +1,57 @@
+name: jf-test
+
+on:
+   push:
+    branches: [ "main" ]
+  #workflow_dispatch:
+
+jobs:
+  create_zip_and_upload:
+
+    runs-on: self-hosted
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Create a sample file
+      run: |
+        echo "This is a sample file content" > sample-file.txt
+
+    - name: Zip the file
+      run: |
+        zip sample-file.zip sample-file.txt
+
+    #- name: Upload to JFrog Artifactory
+    #  run: |
+    #      ping -c 4 172.16.0.213 || echo "Artifactory is unreachable"
+    #      curl -k -u "${{ vars.JFROG_USER }}:${{ vars.JFROG_PASSWORD }}" -T sample-file.zip "${{ vars.JFROG_URL }}/from-github-actions/sample-file.zip"
+
+    - name: Set up JFrog CLI
+      uses: jfrog/setup-jfrog-cli@v3
+      with:
+        version: latest
+
+    - name: Remove Config
+      run: |
+        jf config remove artifactory-server --quiet || echo "No existing config to remove"
+   
+    - name: Add Config
+      run: |
+        jf config add artifactory-server \
+          --artifactory-url="${{ secrets.JFROG_URL }}" \
+          --user="${{ secrets.JFROG_USER }}" \
+          --password="${{ secrets.JFROG_PASSWORD }}" \
+          --interactive=false \
+          --insecure-tls=true
+
+    - name: Debug JFrog
+      run: |
+        jf c show
+        echo "${{ secrets.JFROG_URL }}"
+        echo "${{ secrets.JFROG_USER }}"
+        echo "${{ secrets.JFROG_PASSWORD }}"
+
+    - name: Upload to JFrog Artifactory
+      run: |
+        jf rt upload "sample-file.zip" "from-github-actions/sample-file.zip" --url="${{ secrets.JFROG_URL }}" --insecure-tls
