@@ -24,7 +24,13 @@ jobs:
       uses: jfrog/setup-jfrog-cli@v3
       with:
           version: latest
-
+    - name: Configure JFrog CLI
+      run: |
+        jfrog config add artifactory-server \
+          --url="${{ secrets.JFROG_URL }}" \
+          --user="${{ secrets.JFROG_USER }}" \
+          --password="${{ secrets.JFROG_PASSWORD }}" \
+          --interactive=false
     - name: Upload artifact to JFrog Artifactory
       run: |
         jfrog rt u "./main" "example-repo-local/"
