@@ -42,7 +42,7 @@ jobs:
            jf config add artifactory-server \
              --artifactory-url="${{ secrets.JFROG_URL }}" \
              --user="${{ secrets.JFROG_USER }}" \
-             --password="${{ secrets.JFROG_PASSWORD }}" \
+             --password="" \
              --interactive=false \
              --insecure-tls=true
 
