@@ -25,6 +25,7 @@ jobs:
         curl -fL https://install-cli.jfrog.io | sh
         mkdir -p $HOME/.jfrog/bin
         mv jf $HOME/.jfrog/bin/
+        chmod +x $HOME/.jfrog/bin/jf
         echo "$HOME/.jfrog/bin" >> $GITHUB_PATH
 
     - name: Upload artifact to JFrog Artifactory
