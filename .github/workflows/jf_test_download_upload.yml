@@ -22,30 +22,6 @@ jobs:
       run: |
         zip sample-file.zip sample-file.txt
 
-    #- name: Upload to JFrog Artifactory
-    #  run: |
-    #      ping -c 4 172.16.0.213 || echo "Artifactory is unreachable"
-    #      curl -k -u "${{ vars.JFROG_USER }}:${{ vars.JFROG_PASSWORD }}" -T sample-file.zip "${{ vars.JFROG_URL }}/from-github-actions/sample-file.zip"
-
-    - name: Set up JFrog CLI
-      uses: jfrog/setup-jfrog-cli@v3
-      with:
-        version: latest
-
-    - name: Remove Config
-      run: |
-        jf config remove artifactory-server --quiet || echo "No existing config to remove"
-   
-    - name: Add Config
-      run: |
-           jf config remove artifactory-server || echo "No existing config to remove" \
-           jf config add artifactory-server \
-            --artifactory-url="${{ secrets.JFROG_URL }}" \
-            --user="${{ secrets.JFROG_USER }}" \
-            --password="" \
-            --interactive=false \
-            --insecure-tls=true \
-            --use-generic-config=true
     - name: JF Debug
       run: |
          jf c show
