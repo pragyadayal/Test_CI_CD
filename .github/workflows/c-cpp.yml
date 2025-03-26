@@ -20,13 +20,10 @@ jobs:
     #  run: |
     #     curl -u ${{ secrets.JFROG_USER }}:${{ secrets.JFROG_PASSWORD }} \
     #        -T ./main "https://192.168.27.95/artifactory/example-repo-local/" 
-    - name: Set up JFrog CLI (without sudo)
-      run: |
-        curl -fL https://install-cli.jfrog.io | sh
-        mkdir -p $HOME/.jfrog/bin
-        mv jf $HOME/.jfrog/bin/
-        chmod +x $HOME/.jfrog/bin/jf
-        echo "$HOME/.jfrog/bin" >> $GITHUB_PATH
+    - name: Set up JFrog CLI
+      uses: jfrog/setup-jfrog-cli@v3
+      with:
+          version: latest
 
     - name: Upload artifact to JFrog Artifactory
       run: |
