@@ -18,9 +18,20 @@ jobs:
       run: |
         echo "This is a sample file content" > sample-file.txt
 
+    - name: Debug File Location
+      run: |
+          pwd
+          ls -lah
+
     - name: Zip the file
       run: |
         zip sample-file.zip sample-file.txt
+
+    - name: Debug Zip File Location
+      run: |
+       pwd
+       ls -lah
+
 
     - name: JF Debug
       run: |
