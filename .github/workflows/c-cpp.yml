@@ -31,6 +31,8 @@ jobs:
           --user="${{ secrets.JFROG_USER }}" \
           --password="${{ secrets.JFROG_PASSWORD }}" \
           --interactive=false
+          jfrog config edit artifactory-server --insecure-tls=true
+          
     - name: Upload artifact to JFrog Artifactory
       run: |
         jfrog rt u "./main" "example-repo-local/"
