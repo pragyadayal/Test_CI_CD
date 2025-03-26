@@ -25,6 +25,7 @@ jobs:
     - name: JF Debug
       run: |
          jf c show
+         jf rt ping --server-id=artifactory-server
 
     - name: Upload to JFrog Artifactory
       run: |
