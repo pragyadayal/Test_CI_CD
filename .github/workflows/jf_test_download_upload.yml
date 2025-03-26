@@ -44,11 +44,12 @@ jobs:
             --user="${{ secrets.JFROG_USER }}" \
             --password="" \
             --interactive=false \
-            --insecure-tls=true
+            --insecure-tls=true \
+            --use-generic-config=true
     - name: JF Debug
       run: |
          jf c show
 
     - name: Upload to JFrog Artifactory
       run: |
-        jf rt upload "sample-file.zip" "from-github-actions/sample-file.zip" --url="${{ secrets.JFROG_URL }}" --insecure-tls
+        jf rt upload "sample-file.zip" "from-github-actions/sample-file.zip" --server-id=artifactory-server --insecure-tls
