@@ -1,7 +1,7 @@
 name: Jenkins Trigger
 
 on:
-  push:      
+  #push:      
   workflow_dispatch:
 
 jobs:
