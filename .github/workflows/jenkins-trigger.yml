@@ -1,0 +1,25 @@
+name: C/C++ CI
+
+on:
+  push:      
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Compile the program
+      run: make
+
+    - name: Trigger Jenkins build
+      env:
+        JENKINS_URL: http://your-jenkins-server/job/your-job-name/build
+        JENKINS_TOKEN: your-token
+      run: |
+        curl -X POST "http://127.0.0.1:8080/job/Github_Integration/build?token=my-github-trigger-token" \
+        --user pragya:110c1abdc2db7543e5c700b3080b503f67
+
